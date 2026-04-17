@@ -40,7 +40,7 @@
 ## 📄 许可协议 (License)
 本项目采用 [CC BY-NC-SA 4.0](LICENSE.md) 许可协议。
 
-**Copyright (c) 2026 Yiming Alexander Jason Wu**
+**Copyright (c) 2026 Yiming Jason Wu**
 
 ---
 
