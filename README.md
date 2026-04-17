@@ -47,13 +47,10 @@
 v2.1 引入阶段切换的明确条件与冷启动保护，v2.2 扩展了时间轴感知
 以适配多种学制（3年制 / A-Level / 美高等）。
 
-Copyright © 2026 原作者（框架设计） & Yiming Jason Wu（迭代维护）
-基于 CC BY-NC-SA 4.0 协议发布
-
 ## 📄 许可协议 (License)
 本项目采用 [CC BY-NC-SA 4.0](LICENSE.md) 许可协议。
 
-**Copyright (c) 2026 Yiming Jason Wu**
+**Copyright © 2026 原作者（框架设计） & Yiming Jason Wu（迭代维护）**
 
 ---
 
