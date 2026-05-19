@@ -1,60 +1,41 @@
-# 美本申请第二大脑 (US College App Second Brain) v2.2
+# 美本申请第二大脑 (US College App Second Brain) v3.0
 
-> **第一性原理：招生官在找活生生的人。**
+> 第一性原理：招生官在找活生生的人。
 
-本项目是一个基于 Claude 的深度交互框架。v2.2 版本是目前的完全体，引入了革命性的 **M 值时间轴感知算法**，使 AI 能够根据申请季的动态节点提供差异化建议。
+## What This Is
 
----
+An AI-guided second-brain framework for Chinese high-school students preparing US undergraduate applications.
 
-## 🛠️ v2.2 核心更新：时间轴感知 (M-Value)
-* **动态阶段判定**：系统根据 `M = 申请季开始时间 - 当前日期` 自动计算 M 值，判断你处于探索期、聚焦期、产出期还是等待期。
-* **建议权重调整**：
-    * **探索期 (M ≥ 24)**：侧重兴趣广度，不强行收敛主线。
-    * **聚焦期 (12 ≤ M < 24)**：侧重特质深挖，提炼申请故事第一版。
-    * **产出期 (0 ≤ M < 12)**：侧重文书转化与策略化取舍。
-* **学制全适配**：支持 3 年制、4 年制（G13）、美高等不同学制的时间轴计算。
+## Quickstart
 
----
+1. Read `docs/setup.md`.
+2. Copy `dist/CLAUDE.md`.
+3. Copy `templates/vault/`.
+4. Fill `本体画像/00-核心身份.md`.
+5. Say `启动`.
 
-## 🌟 核心理念
-* **真实性高于一切**：系统在给出建议前，都会自省该建议是否真正属于这个具体的学生。
-* **挖掘深度而非广度**：一件长期深入做的事，永远好过五件浅尝辄止的事。
-* **拒绝“设计化”的独特**：警惕为了独特而独特的陷阱，回归最真实的兴趣基础。
-
----
-
-## 🛠️ 系统架构
-* **本体画像**：包含核心身份、价值观、背景经历与兴趣热爱四个核心模块。
-* **三层记忆架构**：包含情景记忆、语义记忆与强制规则。
-* **智能存储路由**：自动识别内容类型并分发到 `素材库/`、`学校研究/` 等对应路径。
-
----
-
-## 🚀 快速开始
-1. 将 `CLAUDE.md` 内容更新为 **v2.2 完整版**。
-2. 在 `00-核心身份.md` 中填写你的“**学制**”与“**申请季开始时间**”。
-3. 对 AI 说“**启动**”，开始你的深度迭代之旅。
-
----
-
-## 🙏 致谢
+## Attribution
 
 本项目的核心框架——包括第一性原理、对话四阶段、三层记忆架构、
 价值观校准信号系统、活动与文书判断规则——全部由原作者 
 [小红书用户 5317816070] 设计并首发于小红书。
 
 本仓库由 @Ja-son-WU 在原作者授权下进行持续迭代与维护。
-v2.1 引入阶段切换的明确条件与冷启动保护，v2.2 扩展了时间轴感知
-以适配多种学制（3年制 / A-Level / 美高等）。
 
-## 📄 许可协议 (License)
-本项目采用 [CC BY-NC-SA 4.0](LICENSE.md) 许可协议。
+## Repository Structure
+
+- `src/`: modular source prompt.
+- `dist/`: generated user-facing prompt.
+- `templates/vault/`: starter vault.
+- `docs/`: setup, upgrade, and design docs.
+- `examples/`: fictional examples.
+
+## Upgrade
+
+Existing users should read `docs/upgrade-v2-to-v3.md` before copying any files.
+
+## License
+
+This project uses `CC BY-NC-SA 4.0`. See `LICENSE.md`.
 
 **Copyright © 2026 原作者（框架设计） & Yiming Jason Wu（迭代维护）**
-
----
-
-## 📅 版本记录
-- **v2.2**：引入 M 值时间轴算法，实现申请阶段动态感知。
-- **v2.1**：逻辑稳定化补丁，引入懒加载机制与冷启动引导。
-- **v2.0**：初始构建版，确立第一性原理与三层记忆架构。
