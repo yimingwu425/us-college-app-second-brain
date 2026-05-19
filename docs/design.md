@@ -7,7 +7,7 @@ v3 uses a source-and-distribution model.
 - `scripts/build-dist.sh` generates `dist/CLAUDE.md`.
 - `dist/CLAUDE.md` is the only complete runtime prompt users copy.
 - `templates/vault/` is the starter vault.
-- `examples/demo-vault/` shows a fictional filled example.
+- `examples/demo-vault/` is reserved for fictional demo vault examples and currently documents the intended shape.
 
 ## Module Rules
 
