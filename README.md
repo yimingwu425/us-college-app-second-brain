@@ -2,40 +2,103 @@
 
 > 第一性原理：招生官在找活生生的人。
 
-## What This Is
+美本申请第二大脑是一套给中国高中生使用的 AI 申请陪跑框架。它不是活动清单生成器，也不是中介话术库，而是一个围绕“真实的人”持续积累素材、记忆、文书线索、学校研究和申请追踪的工作区。
 
-An AI-guided second-brain framework for Chinese high-school students preparing US undergraduate applications.
+v3.0 将原来的单文件提示词升级为“模块化源码 + 单文件发布”结构：维护者可以在 `src/` 中分模块迭代，普通用户只需要复制 `dist/CLAUDE.md` 和 `templates/vault/` 就能开始使用。
 
-## Quickstart
+## 适合谁
 
-1. Read `docs/setup.md`.
-2. Copy `dist/CLAUDE.md`.
-3. Copy `templates/vault/`.
-4. Fill `本体画像/00-核心身份.md`.
-5. Say `启动`.
+- 正在准备美国本科申请的中国高中生
+- 想长期积累真实素材，而不是临时包装申请故事的学生
+- 希望 AI 记住自己的背景、价值观、活动、文书线索和学校研究的人
+- 想把 Claude / AI 工具变成申请季第二大脑的家庭或顾问
 
-## Attribution
+## 核心能力
 
-本项目的核心框架——包括第一性原理、对话四阶段、三层记忆架构、
-价值观校准信号系统、活动与文书判断规则——全部由原作者 
-[小红书用户 5317816070] 设计并首发于小红书。
+- **本体画像**：记录身份、学制、申请季时间、背景、价值观和兴趣。
+- **三层记忆**：区分情景记忆、语义记忆和强制规则，减少每次重新解释自己的成本。
+- **M 值时间轴**：根据“申请季开始时间 - 当前日期”判断探索期、聚焦期、产出期或等待期。
+- **活动判断**：优先从真实兴趣和已有素材里生长活动方向，避免模板化包装。
+- **文书判断**：帮助寻找只有这个学生能写出来的角度，而不是复述活动列表。
+- **学校研究与申请追踪**：记录学校信息、deadline、ED/EA/RD 进度和待办事项。
 
-本仓库由 @Ja-son-WU 在原作者授权下进行持续迭代与维护。
+## 快速开始
 
-## Repository Structure
+1. 下载或 clone 本仓库。
+2. 打开 `dist/CLAUDE.md`，把完整内容复制到你的 Claude / AI 工作区规则文件中。
+3. 复制 `templates/vault/` 到你的个人工作目录。
+4. 可以把复制后的文件夹改名为 `美本申请第二大脑`。
+5. 填写 `本体画像/00-核心身份.md`，至少补全：
+   - `姓名/称呼`
+   - `性别`
+   - `申请身份`
+   - `年级`
+   - `学制`
+   - `申请季开始时间`
+   - `所在城市/家乡`
+6. 开一个新的 AI 对话，说：`启动`。
 
-- `src/`: modular source prompt.
-- `dist/`: generated user-facing prompt.
-- `templates/vault/`: starter vault.
-- `docs/`: setup, upgrade, and design docs.
-- `examples/`: fictional examples.
+更完整的安装说明见 [docs/setup.md](docs/setup.md)。
 
-## Upgrade
+## 日常怎么用
 
-Existing users should read `docs/upgrade-v2-to-v3.md` before copying any files.
+你可以把它当作申请季的长期对话工作区：
+
+- 想到一个活动、项目、比赛、课程或阅读感受，直接丢给 AI。
+- 有学校官网、申请案例、专业介绍或 deadline，发给 AI 让它整理进学校研究或申请追踪。
+- 不知道文书写什么时，先聊经历、困惑、冲突、改变主意的时刻，而不是直接让 AI 写成稿。
+- 每次重要对话后，让 AI 把新线索写入 `记忆库/`、`素材库/` 或 `申请追踪/`。
+- 当你感觉 AI 说偏了，直接指出，它会把明确偏好写进 `记忆库/强制规则/`。
+
+默认工作区结构在 `templates/vault/` 里，核心目录包括：
+
+```text
+本体画像/      你是谁、价值观、背景、兴趣
+记忆库/        情景记忆、语义记忆、强制规则
+素材库/        经历、感受、思考、关系
+学校研究/      学校信息和个人匹配思考
+申请追踪/      Deadline 和每所学校进度
+日记/          私人记录
+```
+
+## v3.0 仓库结构
+
+- `dist/CLAUDE.md`：用户复制使用的完整运行文件。
+- `templates/vault/`：新用户的第二大脑模板。
+- `src/`：维护者编辑的模块化提示词源码。
+- `src/manifest.md`：`dist/CLAUDE.md` 的拼装顺序。
+- `scripts/build-dist.sh`：从 `src/` 生成 `dist/CLAUDE.md`。
+- `docs/setup.md`：安装说明。
+- `docs/upgrade-v2-to-v3.md`：v2 用户迁移说明。
+- `docs/design.md`：架构说明。
+- `examples/demo-vault/`：示例工作区说明。
+
+## 维护方式
+
+如果你要修改系统规则，不要直接编辑 `dist/CLAUDE.md`。
+
+1. 修改 `src/` 下对应模块。
+2. 确认 `src/manifest.md` 顺序正确。
+3. 运行：
+
+```bash
+./scripts/build-dist.sh
+```
+
+4. 检查生成后的 `dist/CLAUDE.md`。
+
+## 从 v2 升级
+
+已有 v2 工作区的用户不要直接覆盖旧文件。先阅读 [docs/upgrade-v2-to-v3.md](docs/upgrade-v2-to-v3.md)，备份旧工作区，再把已填写内容复制到 v3 对应路径。
+
+## 致谢
+
+本项目的核心框架——包括第一性原理、对话四阶段、三层记忆架构、价值观校准信号系统、活动与文书判断规则——全部由原作者 [小红书用户 5317816070] 设计并首发于小红书。
+
+本仓库由 @Ja-son-WU 在原作者授权下进行持续迭代与维护。v3.0 将项目重构为模块化、可发布、可复用的第二大脑框架。
 
 ## License
 
-This project uses `CC BY-NC-SA 4.0`. See `LICENSE.md`.
+This project uses `CC BY-NC-SA 4.0`. See [LICENSE.md](LICENSE.md).
 
 **Copyright © 2026 原作者（框架设计） & Yiming Jason Wu（迭代维护）**
