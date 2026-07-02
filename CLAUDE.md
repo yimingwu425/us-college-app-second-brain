@@ -4,7 +4,7 @@ This repository publishes user-facing runtime prompts at `dist/CLAUDE.md` and `d
 
 ## For users
 
-Copy `dist/CLAUDE.md` or `dist/AGENTS.md` and `templates/vault/` into your AI workspace. Follow `docs/setup.md`.
+Copy `dist/CLAUDE.md` as `CLAUDE.md`, or `dist/AGENTS.md` as `AGENTS.md`, into an empty AI workspace and say `启动`. Follow `docs/setup.md`.
 
 ## For maintainers
 

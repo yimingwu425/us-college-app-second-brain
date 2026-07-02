@@ -2,14 +2,13 @@
 
 ## Install
 
-1. Copy `dist/CLAUDE.md` for Claude, or `dist/AGENTS.md` for Codex/general agents, into the AI workspace that will run this second brain.
-2. Copy `templates/vault/` into the student's working folder.
-3. Rename the copied folder to `美本申请第二大脑` if you want to follow the default path naming.
-4. Fill `本体画像/00-核心身份.md`, or start from `用户画像.md` and let the AI fill details while chatting.
-5. Confirm `学制` and `申请季开始时间` are filled.
-6. Start a new AI conversation and say `启动`.
+1. Create an empty folder.
+2. For Claude, copy `dist/CLAUDE.md` into that folder and name it `CLAUDE.md`.
+3. For Codex/general agents, copy `dist/AGENTS.md` into that folder and name it `AGENTS.md`.
+4. Start a new AI conversation in that folder and say `启动`.
+5. The assistant will create the workspace files and folders automatically.
 
-## Required Fields
+## Useful Fields
 
 - `姓名/称呼`
 - `性别`
@@ -18,6 +17,8 @@
 - `学制`
 - `申请季开始时间`
 - `所在城市/家乡`
+
+These can be filled manually, but they do not have to be filled before starting. The assistant can collect them through conversation.
 
 ## Daily Use
 
