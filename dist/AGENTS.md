@@ -1,4 +1,4 @@
-# 美本申请第二大脑 | CLAUDE.md v4.0-modern
+# 美本申请第二大脑 | AGENTS.md v4.0-modern
 
 > Generated from src/manifest.md. Edit src/runtime/ modules, then run scripts/build-dist.sh.
 

@@ -3,8 +3,6 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MANIFEST="$ROOT_DIR/src/manifest.md"
-OUT="$ROOT_DIR/dist/CLAUDE.md"
-TMP_OUT="$OUT.tmp.$$"
 
 if [[ ! -f "$MANIFEST" ]]; then
   echo "Missing manifest: $MANIFEST" >&2
@@ -27,24 +25,29 @@ for path in "${paths[@]}"; do
   fi
 done
 
-trap 'rm -f "$TMP_OUT"' EXIT
+build_out() {
+  local name="$1"
+  local out="$ROOT_DIR/dist/$name"
+  local tmp_out="$out.tmp.$$"
 
-{
-  echo "# 美本申请第二大脑 | CLAUDE.md v3.0"
-  echo
-  echo "> Generated from src/manifest.md. Edit src/ modules, then run scripts/build-dist.sh."
-  echo
-  for path in "${paths[@]}"; do
-    file="$ROOT_DIR/$path"
+  {
+    echo "# 美本申请第二大脑 | $name v4.0-modern"
     echo
-    echo "<!-- BEGIN $path -->"
-    cat "$file"
+    echo "> Generated from src/manifest.md. Edit src/runtime/ modules, then run scripts/build-dist.sh."
     echo
-    echo "<!-- END $path -->"
-  done
-} > "$TMP_OUT"
+    for path in "${paths[@]}"; do
+      file="$ROOT_DIR/$path"
+      echo
+      echo "<!-- BEGIN $path -->"
+      cat "$file"
+      echo
+      echo "<!-- END $path -->"
+    done
+  } > "$tmp_out"
 
-mv "$TMP_OUT" "$OUT"
-trap - EXIT
+  mv "$tmp_out" "$out"
+  echo "Wrote $out"
+}
 
-echo "Wrote $OUT"
+build_out "CLAUDE.md"
+build_out "AGENTS.md"

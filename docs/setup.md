@@ -2,10 +2,10 @@
 
 ## Install
 
-1. Copy `dist/CLAUDE.md` into the AI workspace that will run this second brain.
+1. Copy `dist/CLAUDE.md` for Claude, or `dist/AGENTS.md` for Codex/general agents, into the AI workspace that will run this second brain.
 2. Copy `templates/vault/` into the student's working folder.
 3. Rename the copied folder to `美本申请第二大脑` if you want to follow the default path naming.
-4. Fill `本体画像/00-核心身份.md`.
+4. Fill `本体画像/00-核心身份.md`, or start from `用户画像.md` and let the AI fill details while chatting.
 5. Confirm `学制` and `申请季开始时间` are filled.
 6. Start a new AI conversation and say `启动`.
 
@@ -21,4 +21,8 @@
 
 ## Daily Use
 
-Drop conversations, reflections, school research, deadlines, activity updates, and essay ideas into the AI conversation. The assistant routes durable information into the vault structure.
+Drop conversations, reflections, school research, deadlines, activity updates, and essay ideas into the AI conversation.
+
+The assistant keeps durable understanding in `用户画像.md`, stores source material in `素材库/`, stores school-specific research in `学校研究/`, and tracks deadlines in `申请追踪/`.
+
+Automatic consolidation is enabled by default: when a conversation produces durable information, the assistant updates the relevant file and briefly confirms where it was saved.
