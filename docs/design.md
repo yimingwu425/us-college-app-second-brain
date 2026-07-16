@@ -1,28 +1,49 @@
 # Architecture
 
-v4.0-modern uses a small runtime prompt source and a generated distribution file.
+v4.2-lite keeps a small runtime and a thicker repository.
 
-- `src/runtime/` contains maintainable prompt modules.
-- `src/manifest.md` defines publication order.
-- `scripts/build-dist.sh` generates `dist/CLAUDE.md` and `dist/AGENTS.md`.
-- `dist/CLAUDE.md` and `dist/AGENTS.md` are equivalent runtime prompts with tool-specific filenames.
-- `templates/vault/` is a reference starter vault; the runtime prompt can bootstrap an empty folder by itself.
-- `examples/demo-vault/` is reserved for fictional demo vault examples and currently documents the intended shape.
+- `src/runtime/` — five short modules the model actually loads.
+- `src/manifest.md` — publication order.
+- `scripts/build-dist.sh` — builds `dist/CLAUDE.md` and `dist/AGENTS.md`.
+- `templates/vault/` — only starter vault template source.
+- `examples/demo-vault/` — fictional semi-filled vault for humans.
+- `evals/cases.md` — manual regression; judge by principles, not checklist compliance.
 
 ## Runtime Philosophy
 
-The modern version assumes strong model-level intent understanding. The prompt defines principles, judgment standards, data boundaries, and output quality bars. It avoids micromanaging every turn.
+Strong models already understand intent, emotion, and tradeoffs. The prompt should not re-teach conversation management.
 
-Key changes:
+**In runtime (must change behavior every turn):**
 
-- `用户画像.md` is the main long-term memory surface.
-- The prompt supports zero-install bootstrap from a single `CLAUDE.md` or `AGENTS.md` file.
-- Runtime modules live in `src/runtime/`, not a flow-heavy folder tree.
-- Conversation stages are replaced by fluid work modes: understand, explore, judge, execute, and consolidate.
-- Advice can be provisional when context is incomplete, as long as uncertainty is explicit.
+1. Who you are and hard limits
+2. How to work with a person (judgment, not stages)
+3. Where durable state lives
+4. How an empty folder becomes a workspace
+5. What good admissions judgment looks like
 
-## Module Rules
+**Out of runtime (repo only):**
 
-Runtime files should stay few, dense, and principle-driven.
+- Micro-command tables and mode catalogs
+- Detailed product field templates
+- Long China-context encyclopedias
+- Step-by-step consolidation choreography
 
-Add a new runtime module only when it changes the assistant's operating model. Prefer revising existing modules over rebuilding a detailed procedure tree.
+Those belong in demo, docs, or eval notes if needed.
+
+## Module Map
+
+| Module | Role |
+| --- | --- |
+| `00-north-star` | Identity and hard limits |
+| `01-work` | Collaboration posture |
+| `02-files` | Memory surfaces and write rules |
+| `03-bootstrap` | Empty-folder structure |
+| `04-judgment` | Time, truth, schools, light artifact guidance |
+
+## Thinness Rule
+
+If a sentence only restates what a capable model would do anyway, delete it.
+
+If a sentence defines where files go, what must never be faked, or what this product is for, keep it.
+
+Template seed text in bootstrap should stay aligned with `templates/vault/`, but bootstrap can describe seeds briefly instead of pasting full file bodies.

@@ -17,6 +17,11 @@ while IFS= read -r line; do
   paths+=("${line#- }")
 done < "$MANIFEST"
 
+if [[ ${#paths[@]} -eq 0 ]]; then
+  echo "Manifest has no module entries: $MANIFEST" >&2
+  exit 1
+fi
+
 for path in "${paths[@]}"; do
   file="$ROOT_DIR/$path"
   if [[ ! -f "$file" ]]; then
@@ -25,13 +30,19 @@ for path in "${paths[@]}"; do
   fi
 done
 
+# Guardrail: bootstrap and vault template both must exist as dual seeds.
+if [[ ! -d "$ROOT_DIR/templates/vault" ]]; then
+  echo "Missing templates/vault (single template source)" >&2
+  exit 1
+fi
+
 build_out() {
   local name="$1"
   local out="$ROOT_DIR/dist/$name"
   local tmp_out="$out.tmp.$$"
 
   {
-    echo "# 美本申请第二大脑 | $name v4.0-modern"
+    echo "# 美本申请第二大脑 | $name v4.2-lite"
     echo
     echo "> Generated from src/manifest.md. Edit src/runtime/ modules, then run scripts/build-dist.sh."
     echo
@@ -46,7 +57,7 @@ build_out() {
   } > "$tmp_out"
 
   mv "$tmp_out" "$out"
-  echo "Wrote $out"
+  echo "Wrote $out ($(wc -l < "$out" | tr -d ' ') lines)"
 }
 
 build_out "CLAUDE.md"

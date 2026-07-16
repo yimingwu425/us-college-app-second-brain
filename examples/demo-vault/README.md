@@ -1,5 +1,9 @@
-# Demo Vault
+# Demo Vault：林夏舟（虚构）
 
-This folder documents the shape of a fictional filled vault. It should not contain real student data.
+这是一个**完全虚构**的中国高中生工作区样例，用于展示 v4.1 资料应长成什么样子。
 
-Use it to understand how identity, semantic memory, activity material, school research, deadlines, and session archives are expected to evolve.
+- 人物：林夏舟，上海国际课程体系，11 年级，目标申请季约 2027-08
+- 用途：给维护者和新用户看「半满」状态，不是录取模板
+- 禁止：把这里的经历当成真实案例传播
+
+阅读顺序建议：`用户画像.md` → `本体画像/` → `素材库/` → `学校研究/` → `申请追踪/` → `活动列表/` → `文书/` → `推荐信/`
