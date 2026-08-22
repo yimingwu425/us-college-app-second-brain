@@ -1,0 +1,5 @@
+.brain/
+knowledge/inbox/*
+!knowledge/inbox/.gitkeep
+knowledge/sources/*
+!knowledge/sources/.gitkeep

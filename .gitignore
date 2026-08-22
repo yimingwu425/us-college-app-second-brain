@@ -1,2 +1,15 @@
 .DS_Store
 .superpowers/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/*.whl
+.brain/
+knowledge/inbox/*
+!knowledge/inbox/.gitkeep
+knowledge/sources/*
+!knowledge/sources/.gitkeep
+*.sqlite
+.env

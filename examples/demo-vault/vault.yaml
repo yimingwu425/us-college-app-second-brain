@@ -1,0 +1,5 @@
+schema_version: 5
+student_timezone: Asia/Shanghai
+timezone_confirmed: false
+application_cycle_start: 2027-08
+knowledge_path: knowledge

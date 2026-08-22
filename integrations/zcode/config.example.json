@@ -1,0 +1,23 @@
+{
+  "hooks": {
+    "enabled": true,
+    "timeoutMs": 10000,
+    "maxOutputBytes": 20000,
+    "events": {
+      "SessionStart": [
+        {
+          "matcher": "startup|resume|clear|compact",
+          "hooks": [
+            {
+              "type": "process",
+              "command": "brain",
+              "args": ["hook", "session-context", "--path", "${ZCODE_PROJECT_DIR}"],
+              "timeoutMs": 10000,
+              "statusMessage": "读取学生工作区当前状态"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

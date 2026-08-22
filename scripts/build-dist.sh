@@ -4,6 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MANIFEST="$ROOT_DIR/src/manifest.md"
 
+export PYTHONPATH="$ROOT_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
+python3 -m college_brain.cli validate --path "$ROOT_DIR/templates/vault"
+
 if [[ ! -f "$MANIFEST" ]]; then
   echo "Missing manifest: $MANIFEST" >&2
   exit 1
@@ -42,7 +45,7 @@ build_out() {
   local tmp_out="$out.tmp.$$"
 
   {
-    echo "# 美本申请第二大脑 | $name v4.2-lite"
+    echo "# 美本申请第二大脑 | $name v5.0.0"
     echo
     echo "> Generated from src/manifest.md. Edit src/runtime/ modules, then run scripts/build-dist.sh."
     echo

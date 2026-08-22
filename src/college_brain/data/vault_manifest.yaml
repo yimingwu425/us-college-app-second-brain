@@ -1,0 +1,30 @@
+schema_version: 5
+directories:
+  - 学生档案/事实
+  - 素材库/经历
+  - 素材库/感受
+  - 素材库/思考
+  - 素材库/关系
+  - 学校研究
+  - 申请追踪/任务
+  - 申请追踪/学校
+  - 申请材料/CommonApp
+  - 申请材料/活动列表
+  - 申请材料/荣誉列表
+  - 申请材料/文书
+  - 申请材料/推荐信
+  - 状态
+  - 会话
+  - knowledge/inbox
+  - knowledge/sources
+  - knowledge/topics
+files:
+  学生档案/核心信息.md: profile-core
+  学生档案/学业与课程.md: profile-academic
+  学生档案/标化考试.md: profile-tests
+  学生档案/荣誉.md: profile-honors
+  学生档案/约束与偏好.md: profile-preferences
+  用户画像.md: profile-insights
+  申请追踪/总览.md: task-overview
+  状态/当前.md: checkpoint
+  knowledge/catalog.yaml: knowledge-catalog

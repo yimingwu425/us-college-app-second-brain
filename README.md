@@ -1,95 +1,109 @@
-# 美本申请第二大脑 (US College App Second Brain) v4.2-lite
+# 美本申请第二大脑 v5
 
-> 第一性原理：招生官在找活生生的人。
+美本申请第二大脑是一套只面向学生本人的 Prompt + 本地工具。学生用自然语言与 ZCode/Codex 沟通，资料保存在自己可读、可修改的 Markdown 工作区；`brain` CLI 负责时间、任务状态、可靠存取、顾问知识检索、校验和旧数据迁移。
 
-美本申请第二大脑是一套给中国高中生使用的 AI 申请陪跑框架。它不是活动清单生成器，也不是中介话术库，而是一个围绕「真实的人」持续积累素材、记忆、文书线索、学校研究和申请追踪的工作区。
+它不是网申代提交工具，也不是家长、顾问或中介的多人协作系统。
 
-v4.2-lite 相信强模型：runtime 只保留身份、文件约定、启动结构和申请判断。默认帮用户做成他提出且可行的事；不谈道德。只在造假不可核查、伪造证件、安全危机等不可行处用实务理由刹车。仓库仍保留 templates、虚构 demo 与 evals。
+## 解决什么
 
-## 适合谁
+- **可靠记忆**：把学生事实、经历素材、AI 判断和申请产物分开保存，并按问题取回相关记录。
+- **真实时间**：每个新会话读取当前时间；任务完成、延期或出现相对日期时重新计算。
+- **任务状态**：学生说“做完了”后，同轮更新任务与 checkpoint，不再继续把它当未完成事项追问。
+- **顾问知识库**：把合并的 TXT/Markdown 视频转写稿拆成独立来源，通过关键词和可选云端 embedding 检索，并返回可追溯引用。
+- **完整申请流程**：覆盖建档、素材、活动、选校、Common App、逐校申请、提交检查和申请后事项。
+- **数据可带走**：Markdown 是唯一事实来源；SQLite 只保存可重建索引。
 
-- 正在准备美国本科申请的中国高中生
-- 想长期积累真实素材，而不是临时包装申请故事的学生
-- 希望 AI 记住自己的背景、价值观、活动、文书线索和学校研究的人
-- 想把 Claude / AI 工具变成申请季第二大脑的家庭或顾问
+## 安装
 
-## 核心能力
+需要 Python 3.11 或以上版本。
 
-- **动态用户画像**：`用户画像.md` 作为理解层；`本体画像/` 作为事实底稿。
-- **零安装启动**：空文件夹里只放一个运行文件，agent 收到「启动」后自动创建全部资料结构。
-- **自动沉淀**：有长期价值就写入；画像乱了就压缩，不靠用户记流程。
-- **申请判断**：时间感、真兴趣、文书与选校匹配；反对包装，不靠检查清单表演专业。
-- **可提交产物**：需要时落到活动描述、文书版本、推荐信备忘；格式由场景决定。
-- **学校研究与申请追踪**：学校信息、deadline 与进度。
-
-## 快速开始
-
-1. 新建一个空文件夹。
-2. Claude 用户把 `dist/CLAUDE.md` 放进去并命名为 `CLAUDE.md`；Codex/通用 agent 用户把 `dist/AGENTS.md` 放进去并命名为 `AGENTS.md`。
-3. 开一个新的 AI 对话，说：`启动`。
-4. agent 会自动创建 `用户画像.md`、`素材库/`、`学校研究/`、`申请追踪/`、`文书/` 等文件和目录。
-
-更完整的安装说明见 [docs/setup.md](docs/setup.md)。
-
-## 日常怎么用
-
-- 想到一个活动、项目、比赛、课程或阅读感受，直接丢给 AI。
-- 有学校官网、申请案例、专业介绍或 deadline，发给 AI 让它整理。
-- 不知道文书写什么时，先聊经历、困惑、冲突、改变主意的时刻。
-- 用自然语言即可：想记就说，想听它怎么看你、想审一稿文书、今天不想谈申请，直接讲。
-- 感觉 AI 说偏了，直接指出；明确偏好会写进 `用户画像.md`。
-
-agent 初始化后的核心目录包括：
-
-```text
-用户画像.md    AI 维护的理解层
-本体画像/      用户可改的事实底稿
-素材库/        经历、感受、思考、关系
-学校研究/      学校信息和个人匹配
-申请追踪/      Deadline 和每所学校进度
-文书/          主文书与补充文书版本
-活动列表/      Activities 版本
-推荐信/        给老师的 brief
-对话历史.md    重要会话摘要
-日记/          私人记录
+```bash
+cd us-college-app-second-brain
+python3 -m pip install -e .
 ```
+
+创建学生工作区：
+
+```bash
+brain init ~/college-vault --timezone Asia/Shanghai --cycle 2027-08
+cp dist/AGENTS.md ~/college-vault/AGENTS.md
+cd ~/college-vault
+brain doctor
+```
+
+然后在该目录打开 ZCode/Codex。学生可以直接说当前最想解决的事，不需要先填完整问卷。
+
+完整安装说明见 [docs/setup.md](docs/setup.md)，架构见 [docs/design.md](docs/design.md)。
+
+## 日常命令
+
+通常由 agent 根据 `AGENTS.md` 自动调用；学生也可以手动检查：
+
+```bash
+brain context --query "Brown 补充文书"
+brain task list
+brain checkpoint show
+brain knowledge search "ED 选校策略"
+brain knowledge search "已去个人信息的 ED 选校策略" --allow-remote-query
+brain validate
+```
+
+## 导入顾问视频转写稿
+
+原稿默认是私有资料，不进入公开仓库。先预览视频边界：
+
+```bash
+brain knowledge import /path/to/merged.md --dry-run
+brain knowledge import /path/to/merged.md --advisor "顾问名"
+```
+
+建立检索索引：
+
+```bash
+export BRAIN_EMBEDDING_BASE_URL="https://api.example.com/v1"
+export BRAIN_EMBEDDING_API_KEY="..."
+export BRAIN_EMBEDDING_MODEL="embedding-model"
+brain knowledge index --allow-remote-content
+```
+
+未配置 embedding 或不加远程授权标志时，中文关键词检索仍可使用。`--allow-remote-content` 会把顾问转写片段发送给配置的 embedding 服务；`--allow-remote-query` 会发送已去个人信息的查询。转写稿是顾问二手观点；学校政策、专业要求和 deadline 仍需核对当前官网。
+
+## 从 v4 迁移
+
+迁移永远写入新目录，不覆盖旧 vault：
+
+```bash
+brain migrate-v4 /path/to/old-vault --output /path/to/new-vault --dry-run
+brain migrate-v4 /path/to/old-vault --output /path/to/new-vault --cycle 2027-08
+brain validate --path /path/to/new-vault
+```
+
+迁移后会生成 `迁移报告.md`。无法确认的旧状态不会擅自标成完成。
 
 ## 仓库结构
 
-- `dist/CLAUDE.md` / `dist/AGENTS.md`：用户复制使用的完整运行文件（生成物）。
-- `templates/vault/`：工作区模板唯一真相源。
-- `src/runtime/`：薄运行时（身份 / 共事 / 文件 / 启动 / 判断）。
-- `src/manifest.md`：拼装顺序。
-- `scripts/build-dist.sh`：生成 dist。
-- `examples/demo-vault/`：虚构学生「林夏舟」半满样例。
-- `evals/cases.md`：改 runtime 后的人工回归用例。
-- `docs/setup.md` / `docs/design.md`：安装与架构说明。
+```text
+src/college_brain/       本地 CLI、数据模型、迁移与检索
+src/runtime/             学生端运行规则源文件
+src/manifest.md          runtime 构建顺序
+scripts/build-dist.sh    校验模板并生成 dist
+schemas/                 v5 数据契约说明
+integrations/zcode/      可选 ZCode SessionStart 集成
+examples/demo-vault/     虚构学生 v5 样例
+templates/vault/         brain init 生成的参考模板
+evals/                   模型行为回归用例
+tests/                   自动测试
+```
 
-## 维护方式
-
-如果你要修改系统规则，不要直接编辑 `dist/` 里的生成文件。
-
-1. 修改 `src/runtime/` 下对应模块，或 `templates/vault/` 模板。
-2. 确认 `src/manifest.md` 顺序正确。
-3. 运行：
+维护时修改 `src/runtime/` 和 `src/college_brain/`，然后运行：
 
 ```bash
+pytest
 ./scripts/build-dist.sh
 ```
 
-4. 检查生成后的 `dist/CLAUDE.md` 和 `dist/AGENTS.md`。
-5. 抽测 `evals/cases.md` 中至少 5 条（用例仍有效；期望更偏原则而非逐条流程）。
-
-根目录的 `CLAUDE.md` / `AGENTS.md` 是**仓库维护者指南**，不是发给学生的运行时提示。学生使用的是 `dist/` 下的文件。
-
-## 致谢
-
-本项目的原始核心——包括第一性原理、反包装判断、价值观校准、活动与文书判断规则——由原作者 [小红书用户 5317816070] 设计并首发于小红书。
-
-本仓库由 @Ja-son-WU 在原作者授权下进行持续迭代与维护。v4.2-lite 面向更强的现代 AI：原则与文件约定留在 runtime，细则与范例留在仓库。
+不要直接编辑 `dist/`。
 
 ## License
 
-This project uses `CC BY-NC-SA 4.0`. See [LICENSE.md](LICENSE.md).
-
-**Copyright © 2026 原作者（框架设计） & Yiming Jason Wu（迭代维护）**
+项目代码和原创文档使用 `CC BY-NC-SA 4.0`，见 [LICENSE.md](LICENSE.md)。第三方视频转写稿不自动获得本项目许可，公开或分发前必须单独确认权利。

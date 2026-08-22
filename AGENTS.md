@@ -1,23 +1,16 @@
 # Repository Maintainer Guide
 
-This repository publishes user-facing runtime prompts at `dist/CLAUDE.md` and `dist/AGENTS.md`.
+This repository publishes the student runtime at `dist/AGENTS.md` and `dist/CLAUDE.md`.
 
-> This root file is for maintainers. Students should copy files from `dist/`, not this file.
+Students use the v5 local `brain` CLI plus one runtime file. This root file is for maintainers, not a student vault.
 
-## For users
+## Maintainer workflow
 
-Copy `dist/CLAUDE.md` as `CLAUDE.md`, or `dist/AGENTS.md` as `AGENTS.md`, into an empty workspace and say `启动`. See `docs/setup.md`.
+1. Edit Python code under `src/college_brain/`.
+2. Edit student rules under `src/runtime/`.
+3. Keep `src/college_brain/data/vault_manifest.yaml` as the machine-readable vault contract.
+4. Run `pytest`.
+5. Run `./scripts/build-dist.sh`; it validates `templates/vault/` before generating dist.
+6. Review `evals/cases.md` for model behavior changes.
 
-Example vault: `examples/demo-vault/`.
-
-## For maintainers
-
-v4.2-lite rule: **keep the runtime thin**. Prefer deleting redundant instructions over adding procedures.
-
-1. Edit `src/runtime/` (five modules).
-2. Keep `templates/vault/` as the only vault template source.
-3. Keep `src/manifest.md` ordered.
-4. Run `./scripts/build-dist.sh`.
-5. Spot-check `evals/cases.md` — pass means principle-correct behavior, not matching old checklists.
-
-Do not edit `dist/` directly unless repairing a release and backporting into `src/runtime/` immediately.
+Do not edit `dist/` directly. Do not commit private transcripts, embedding keys, generated SQLite indexes, or real student vaults.
